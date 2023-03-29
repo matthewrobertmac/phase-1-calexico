@@ -19,6 +19,7 @@ let form = document.querySelector("#cart-form")
 fetch("http://localhost:3000/menu")
   .then((response) => response.json())
   .then((menuItems) => createMenuItems(menuItems));
+  
   form.addEventListener("submit", (e) => {
     e.preventDefault(),
     console.log(e.target["cart-amount"].value),
