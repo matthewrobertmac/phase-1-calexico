@@ -10,8 +10,7 @@ let dishPrice = document.getElementById("dish-price")
 var inputButton = document.querySelector("input#button")
 let cartAmount = document.getElementById("cart-amount")
 let numberInCart = document.getElementById("number-in-cart")
-numberInCart.textContent = 0;
-let form = document.querySelector("form#cart-form")
+let form = document.querySelector("#cart-form")
 
 
 
@@ -20,6 +19,13 @@ let form = document.querySelector("form#cart-form")
 fetch("http://localhost:3000/menu")
   .then((response) => response.json())
   .then((menuItems) => createMenuItems(menuItems));
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(),
+    console.log(e.target["cart-amount"].value),
+    numberInCart.textContent = (parseInt(numberInCart.textContent) + parseInt(e.target["cart-amount"].value))
+
+});
+
 
 
 function createMenuItems(menuItems) {
@@ -37,22 +43,17 @@ function createMenuItems(menuItems) {
             dishName.textContent = menuItem.name;
             dishDescription.textContent = menuItem.description;
             dishPrice.textContent = menuItem.price;
-    
-
-
-        });
+            })
+        
         
 
         
         });
+        
+
         
 
 };
-form.addEventListener("submit", (e) => {
-    e.preventDefault(),
-    console.log(e.target["cart-amount"].value),
-    numberInCart.textContent = e.target["cart-amount"].value
-})
 
 
 /*
